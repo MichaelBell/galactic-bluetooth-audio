@@ -1,14 +1,16 @@
 #include "lib/rgb.hpp"
 #include "effect.hpp"
 
-void ClassicFFT::update(int16_t *buffer16, size_t sample_count) {
+void ClassicFFT::add_samples(int16_t *buffer16, size_t sample_count) {
     int16_t* fft_array = &fft.sample_array[SAMPLES_PER_AUDIO_BUFFER * (BUFFERS_PER_FFT_SAMPLE - 1)];
     memmove(fft.sample_array, &fft.sample_array[SAMPLES_PER_AUDIO_BUFFER], (BUFFERS_PER_FFT_SAMPLE - 1) * sizeof(uint16_t));
 
     for (auto i = 0u; i < SAMPLES_PER_AUDIO_BUFFER; i++) {
         fft_array[i] = buffer16[i];
     }
+}
 
+void ClassicFFT::update() {
     fft.update();
 
     for (auto i = 0u; i < display.WIDTH; i++) {

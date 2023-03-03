@@ -12,7 +12,8 @@ class Effect {
             display(display), 
             fft(fft) {};
         virtual void init(uint32_t sample_frequency);
-        virtual void update(int16_t *buffer16, size_t sample_count);
+        virtual void add_samples(int16_t *buffer16, size_t sample_count);
+        virtual void update();
 };
 
 class RainbowFFT : public Effect {
@@ -42,7 +43,8 @@ class RainbowFFT : public Effect {
 
     public:
         RainbowFFT(Display& display, FIX_FFT& fft) : Effect(display, fft) {}
-        void update(int16_t *buffer16, size_t sample_count) override;
+        void add_samples(int16_t *buffer16, size_t sample_count) override;
+        void update() override;
         void init(uint32_t sample_frequency) override;
 };
 
@@ -72,6 +74,7 @@ class ClassicFFT : public Effect {
 
     public:
         ClassicFFT(Display& display, FIX_FFT &fft) : Effect(display, fft) {}
-        void update(int16_t *buffer16, size_t sample_count) override;
+        void add_samples(int16_t *buffer16, size_t sample_count) override;
+        void update() override;
         void init(uint32_t sample_frequency) override;
 };

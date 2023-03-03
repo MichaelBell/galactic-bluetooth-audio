@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
 
 set(NAME blunicorn)
+set(DISPLAY_PATH display/cosmic/cosmic_unicorn.cmake)
 
 include(pico_sdk_import.cmake)
 include(pico_extras_import.cmake)
@@ -48,6 +49,7 @@ target_compile_definitions(${NAME} PRIVATE
     PICO_AUDIO_I2S_DATA_PIN=9
     PICO_AUDIO_I2S_CLOCK_PIN_BASE=10
     BLUETOOTH_DEVICE_NAME="${DISPLAY_NAME}"
+    EFFECTS_ON_CORE1=1
 )
 
 pico_enable_stdio_usb(${NAME} 1)
